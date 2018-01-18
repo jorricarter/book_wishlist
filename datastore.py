@@ -1,10 +1,12 @@
 
 import os
+import datetime
 from book import Book
 
 DATA_DIR = 'data'
 BOOKS_FILE_NAME = os.path.join(DATA_DIR, 'wishlist.txt')
 COUNTER_FILE_NAME = os.path.join(DATA_DIR, 'counter.txt')
+CURRENT_DATE = datetime.datetime.now()
 
 separator = '^^^'  # a string probably not in any valid data relating to a book
 
@@ -91,6 +93,7 @@ def set_read(book_id, read):
 
         if book.id == book_id:
             book.read = True
+            book.date = '%d/%d/%d' % (CURRENT_DATE.month, CURRENT_DATE.day, CURRENT_DATE.year)
             return True
 
     return False # return False if book id is not found
