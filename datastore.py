@@ -95,6 +95,15 @@ def set_read(book_id, read):
 
     return False # return False if book id is not found
 
+def delete_book(book_id):
+    '''deleting book from wishlist. Return true is book is found in DB and update is made'''
+
+    global book_list
+
+    for book in book_list:
+
+        if book.id == book_id:
+            book_list.remove(book)
 
 
 def make_book_list(string_from_file):
