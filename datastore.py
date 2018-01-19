@@ -110,6 +110,17 @@ def set_read(book_id, read):
     return False # return False if book id is not found
 
 
+def check_read(new_book):
+    '''Check if a book with the same author and title already exists'''
+    global book_list
+
+    for book in book_list:
+        if book.title == new_book.title:
+            if book.author == new_book.author:
+                return True
+    return False
+
+
 def delete_book(book_id):
     '''deleting book from wishlist. Return true is book is found in DB and update is made'''
 
