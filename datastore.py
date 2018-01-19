@@ -68,6 +68,17 @@ def get_books(**kwargs):
         return read_books
 
 
+def edit_book(book_id, new_info):
+    '''Update book with given book_id to new title and/or author.'''
+    global book_list
+
+    for book in book_list:
+
+        if book.id == book_id:
+            book.title = new_info.title
+            book.author = new_info.author
+            return True
+
 
 def add_book(book):
     ''' Add to db, set id value, return Book'''
@@ -98,6 +109,7 @@ def set_read(book_id, read):
 
     return False # return False if book id is not found
 
+
 def delete_book(book_id):
     '''deleting book from wishlist. Return true is book is found in DB and update is made'''
 
@@ -107,6 +119,7 @@ def delete_book(book_id):
 
         if book.id == book_id:
             book_list.remove(book)
+            return True
 
 
 def make_book_list(string_from_file):

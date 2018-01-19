@@ -21,11 +21,24 @@ def handle_choice(choice):
     elif choice == '5':
         del_book()
 
+    elif choice == '6':
+        edit_book()
+
     elif choice == 'q':
-        quit()
+            quit()
 
     else:
         ui.message('Please enter a valid selection')
+
+
+def edit_book():
+    '''Get choice from user, edit a book's Title or Author'''
+    book_id = ui.ask_for_book_id()
+    new_info = ui.get_new_book_info()
+    if datastore.edit_book(book_id, new_info):
+        ui.message('Successfully updated')
+    else:
+        ui.message('Book id not found in database')
 
 
 def show_unread():
@@ -55,13 +68,15 @@ def new_book():
     datastore.add_book(new_book)
     ui.message('Book added: ' + str(new_book))
 
+
 def del_book():
     '''deleting book from list based on id'''
     book_id = ui.ask_for_book_id()
     if datastore.delete_book(book_id):
-        ui.message('Book not found, please try again.')
-    else:
         ui.message('BOOK REMOVED FROM DATABASE')
+    else:
+        ui.message('Book not found, please try again.')
+
 
 def quit():
     '''Perform shutdown tasks'''
