@@ -13,19 +13,19 @@ separator = '^^^'  # a string probably not in any valid data relating to a book
 book_list = []
 counter = 0
 
+
 def setup():
     ''' Read book info from file, if file exists. '''
 
     global counter
 
-    try :
+    try:
         with open(BOOKS_FILE_NAME) as f:
             data = f.read()
             make_book_list(data)
     except FileNotFoundError:
         # First time program has run. Assume no books.
         pass
-
 
     try:
         with open(COUNTER_FILE_NAME) as f:
@@ -46,13 +46,22 @@ def shutdown():
     try:
         os.mkdir(DATA_DIR)
     except FileExistsError:
-        pass # Ignore - if directory exists, don't need to do anything. 
+        pass  # Ignore - if directory exists, don't need to do anything.
 
     with open(BOOKS_FILE_NAME, 'w') as f:
         f.write(output_data)
 
     with open(COUNTER_FILE_NAME, 'w') as f:
         f.write(str(counter))
+
+
+def search_books(book_title):
+    ''' Takes title as argument. Returns books with matching titles. '''
+
+    global book_list
+    # This loops through all books, checks if title matches search, adds matches to 'found_books'
+    found_books = [book for book in book_list if book.title == book_title]
+    return found_books
 
 
 def get_books(**kwargs):
@@ -64,7 +73,7 @@ def get_books(**kwargs):
         return book_list
 
     if 'read' in kwargs:
-        read_books = [ book for book in book_list if book.read == kwargs['read'] ]
+        read_books = [book for book in book_list if book.read == kwargs['read']]
         return read_books
 
 
@@ -107,7 +116,7 @@ def set_read(book_id, read):
             book.date = '%d/%d/%d' % (CURRENT_DATE.month, CURRENT_DATE.day, CURRENT_DATE.year)
             return True
 
-    return False # return False if book id is not found
+    return False  # return False if book id is not found
 
 
 def check_read(new_book):

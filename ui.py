@@ -12,6 +12,7 @@ def display_menu_get_choice():
         4. Add book to wishlist
         5. Remove book from wishlist
         6. Edit a book
+        7. Search for a book
         q. Quit
     ''')
 
@@ -20,11 +21,16 @@ def display_menu_get_choice():
     return choice
 
 
+def ask_for_book_title():
+    title = input('Enter title: ')
+    return title
+
+
 def show_list(books):
     ''' Format and display a list of book objects'''
 
     if len(books) == 0:
-        print ('* No books *')
+        print('* No books *')
         return
 
     for book in books:
@@ -52,7 +58,7 @@ def get_new_book_info():
 
     ''' Get title and author of new book from user '''
 
-    title = input('Enter title: ')
+    title = ask_for_book_title()
     author = input('Enter author: ')
     return Book(title, author)
 

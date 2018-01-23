@@ -1,11 +1,10 @@
-#Main program
+# Main program
 
 import ui, datastore
 from book import Book
 
 
 def handle_choice(choice):
-
     if choice == '1':
         show_unread()
 
@@ -24,11 +23,21 @@ def handle_choice(choice):
     elif choice == '6':
         edit_book()
 
+    elif choice == '7':
+        search_book()
+
     elif choice == 'q':
-            quit()
+        quit()
 
     else:
         ui.message('Please enter a valid selection')
+
+
+def search_book():
+    '''Get title from user. Show books with matching titles.'''
+    book_title = ui.ask_for_book_title()
+    found_books = datastore.search_books(book_title)
+    ui.show_list(found_books)
 
 
 def edit_book():
@@ -87,7 +96,6 @@ def quit():
 
 
 def main():
-
     datastore.setup()
 
     quit = 'q'
