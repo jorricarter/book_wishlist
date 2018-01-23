@@ -33,6 +33,11 @@ def show_list(books):
         print('* No books *')
         return
 
+    print('Unread Books by Title:' + '\n')
+    for book in books:
+        print(book.title)
+    print('-------------------------------------------------')
+    print('Unread Book Details:' + '\n')
     for book in books:
         print(book)
 
