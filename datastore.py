@@ -114,6 +114,7 @@ def set_read(book_id, read):
         if book.id == book_id:
             book.read = True
             book.date = '%d/%d/%d' % (CURRENT_DATE.month, CURRENT_DATE.day, CURRENT_DATE.year)
+            book.rating = int(input('Enter a rating for this book 1-10: '))
             return True
 
     return False  # return False if book id is not found
